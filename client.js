@@ -52,42 +52,53 @@ function calculateIndividualEmployeeBonus( employee ) {
   console.log(' Name of employee: ', employee);
   // your logic here
   let bonusPercentage;
+
+  const salaryNumber = Number(employee.annualSalary)
+
     if (employee.reviewRating <= 2){
       bonusPercentage = 0
     } else if (employee.reviewRating == 3) {
-      bonusPercentage = .04
+      bonusPercentage = 4
     } else if (employee.reviewRating == 4) {
-      bonusPercentage = .06
+      bonusPercentage = 6
     } else if (employee.reviewRating == 5) {
-      bonusPercentage = .10
+      bonusPercentage = 10
     }
     if (employee.employeeNumber.length == 4) {
-      bonusPercentage += .05
+      bonusPercentage += 5
     }
     if (employee.annualSalary > 65000) {
-      bonusPercentage -= .01
+      bonusPercentage -= 1
     }
-    if (bonusPercentage > .13) {
-      bonusPercentage = .13
+    if (bonusPercentage > 13) {
+      bonusPercentage = 13
     }
     if (bonusPercentage < 0) {
       bonusPercentage = 0
     }
 
-    let totalCompensation = +employee.annualSalary * bonusPercentage + +employee.annualSalary
+    let bonusAsDecimal = bonusPercentage/100
+    let totalBonus = Math.floor(salaryNumber * bonusAsDecimal)
+
+
+    let totalCompensation = totalBonus + salaryNumber
     
 
     let result = {
       name: employee.name,
       bonusPercentage: bonusPercentage,
       totalCompensation: totalCompensation,
-      totalBonus: 'totalBonus TBD'
+      totalBonus: totalBonus
     }
 
     return result
   }
   
+  for (let individual of employees){
+    console.log(`%c ${individual.name}`, 'color: black; background: yellow;')
+    console.log(calculateIndividualEmployeeBonus(individual))
+  }
+
   // return new object with bonus results
 // return employees.name
-
-console.log(calculateIndividualEmployeeBonus(employees[2]));
+;
